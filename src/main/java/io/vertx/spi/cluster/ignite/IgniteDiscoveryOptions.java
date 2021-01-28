@@ -19,6 +19,7 @@ import io.vertx.codegen.annotations.DataObject;
 import io.vertx.core.VertxException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.spi.cluster.ignite.impl.TestIpFinder;
 import org.apache.ignite.spi.discovery.DiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.multicast.TcpDiscoveryMulticastIpFinder;
@@ -153,6 +154,13 @@ public class IgniteDiscoveryOptions {
               .collect(Collectors.toList())
             )
           );
+      case "TestIpFinder":
+        return new TcpDiscoverySpi()
+          .setJoinTimeout(properties.getLong("joinTimeout", DFLT_JOIN_TIMEOUT))
+          .setLocalAddress(properties.getString("localAddress", null))
+          .setLocalPort(properties.getInteger("localPort", DFLT_PORT))
+          .setLocalPortRange(properties.getInteger("localPortRange", DFLT_PORT_RANGE))
+          .setIpFinder(new TestIpFinder());
       default:
         throw new VertxException("not discovery spi found");
     }
