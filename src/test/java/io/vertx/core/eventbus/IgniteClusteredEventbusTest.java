@@ -51,7 +51,7 @@ public class IgniteClusteredEventbusTest extends ClusteredEventBusTest {
   }
 
   @Test
-  @Repeat(times = 32)
+  @Repeat(times = 64)
   public void testPublishJsonArray() {
     super.testPublishJsonArray();
   }

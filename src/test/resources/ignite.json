@@ -1,9 +1,10 @@
 {
   "localHost": "127.0.0.1",
   "discoverySpi": {
-    "type": "TestIpFinder",
+    "type": "TcpDiscoveryVmIpFinder",
     "properties": {
-      "joinTimeout": 10000
+      "joinTimeout": 10000,
+      "addresses": ["127.0.0.1:47500..47549"]
     }
   },
   "cacheConfiguration": [
