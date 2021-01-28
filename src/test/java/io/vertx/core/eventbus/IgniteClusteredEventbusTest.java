@@ -22,7 +22,9 @@ import io.vertx.LoggingTestWatcher;
 import io.vertx.core.Vertx;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.vertx.spi.cluster.ignite.IgniteClusterManager;
+import io.vertx.test.core.Repeat;
 import org.junit.Rule;
+import org.junit.Test;
 
 import java.util.List;
 
@@ -42,5 +44,11 @@ public class IgniteClusteredEventbusTest extends ClusteredEventBusTest {
   @Override
   protected void closeClustered(List<Vertx> clustered) throws Exception {
     Lifecycle.closeClustered(clustered);
+  }
+
+  @Test
+  @Repeat(times = 32)
+  public void testPublishJsonArray() {
+    super.testPublishJsonArray();
   }
 }
